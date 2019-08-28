@@ -157,7 +157,7 @@ export default class Service {
     let price = Common.toFloat(catagoryObject.props.price) + increment
     catagoryObject.props.price =  price
 
-    _api.post(`${api}/${Id}`, catagoryObject.props)
+    _api.put(`${api}/${Id}`, catagoryObject.props)
       .then(response => {
         _setState('cars', _state.cars)
       })

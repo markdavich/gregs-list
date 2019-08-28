@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="/assets/style.css">
   <title>Gregs List</title>
 </head>
-<body>
-  <h1>Gregs List</h1>
-  <header>
 
+<body>
+  <header>
+    <nav class="navbar navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="#">
+        <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top"
+          alt="">
+        Greg's List
+      </a>
+
+    <form class="form-inline my-2 my-lg-0" onsubmit="app.controllers.controller.changeApi(event)">
+      <select class="form-control" onchange="app.controllers.controller.changeApi(event)" name="api">
+        <option value="cars">Cars</option>
+        <option value="houses">Houses</option>
+        <option value="jobs">Jobs</option>
+      </select>
+      <input class="form-control mr-sm-2 ml-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </nav>
   </header>
   <section>
     <div class="container-fluid">
@@ -43,4 +60,5 @@
     integrity="sha256-XmdRbTre/3RulhYk/cOBUMpYlaAp2Rpo/s556u0OIKk=" crossorigin="anonymous"></script>
   <script src="main.js" type="module"></script>
 </body>
+
 </html>

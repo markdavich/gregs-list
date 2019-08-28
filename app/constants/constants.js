@@ -59,7 +59,9 @@ export class Catagory {
       ${getInputs(this.props)}
       <div class="row">
         <div class="col text-center">
-          <button type="submit" class="btn btn-success m-3">Add Car</button>
+          <button type="submit" class="btn btn-success m-3">
+            Add ${Common.properCase(this.api)}
+          </button>
         </div>
       </div>
       </form>
@@ -89,9 +91,9 @@ export class Catagory {
     // @ts-ignore
     let bed = beds > 1 ? beds += ' bedrooms' : beds += ' bedroom'
     // @ts-ignore
-    let bath = baths > 1 ? baths += ' bedrooms' : baths += ' bedroom'
+    let bath = baths > 1 ? baths += ' baths' : baths += ' bath'
 
-    return `${year} - ${levels} story ${bed} bed ${bath}`
+    return `${year} - ${levels} story ${bed} ${bath}`
   }
 
   getCarTitle() {

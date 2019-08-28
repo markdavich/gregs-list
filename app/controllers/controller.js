@@ -96,5 +96,16 @@ export default class Controller {
   loadApi(api) {
     _service.loadApi(api)
   }
+
+  changeApi(event) {
+    event.preventDefault()
+    let api = event.target
+    _api = api.value
+    this.loadApi(_api)
+  }
+
+  search(event) {
+    event.preventDefault()
+  }
 }
 
