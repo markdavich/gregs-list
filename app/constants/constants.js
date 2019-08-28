@@ -75,7 +75,7 @@ export class Catagory {
   }
 
   getColumnTag() {
-    return '<div class="col-6">'
+    return '<div class="col-12 col-md-6">'
   }
 
   getCardTag() {

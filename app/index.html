@@ -14,33 +14,33 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-light bg-light fixed-top">
+    <nav id="nav-bar" class="navbar navbar-light bg-light fixed-top">
       <a class="navbar-brand" href="#">
         <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top"
           alt="">
         Greg's List
       </a>
 
-    <form class="form-inline my-2 my-lg-0" onsubmit="app.controllers.controller.changeApi(event)">
-      <select class="form-control" onchange="app.controllers.controller.changeApi(event)" name="api">
-        <option value="cars">Cars</option>
-        <option value="houses">Houses</option>
-        <option value="jobs">Jobs</option>
-      </select>
-      <input class="form-control mr-sm-2 ml-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+      <form class="form-inline my-2 my-lg-0" onsubmit="app.controllers.controller.changeApi(event)">
+        <select class="form-control" onchange="app.controllers.controller.changeApi(event)" name="api">
+          <option value="cars">Cars</option>
+          <option value="houses">Houses</option>
+          <option value="jobs">Jobs</option>
+        </select>
+        <input class="form-control mr-sm-2 ml-sm-2" name="search" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </nav>
   </header>
   <section>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-8">
+        <div class="col-12 col-md-8">
           <div id="cards" class="row">
             <!-- Card Templates get injected here -->
           </div>
         </div>
-        <div id="form" class="col-4">
+        <div id="form" class="col-12 col-md-4">
           <!-- Input Form Templates get injected here -->
         </div>
       </div>
