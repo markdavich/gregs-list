@@ -1,0 +1,29 @@
+.description {
+  height: 123px;
+  width:100%;
+  overflow:hidden;
+  border-radius: 7px;
+  border: 1px solid rgba(128, 128, 128, 0.534);
+  background-color: rgba(219, 219, 219, 0.157);
+
+  padding: 10px;
+}
+
+.description:hover {
+  overflow: scroll;
+}
+
+.image {
+  height: 150px;
+  width: auto;
+
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+.title {
+  height: 2em;
+}
