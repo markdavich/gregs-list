@@ -1,31 +1,32 @@
 import Car from '../models/car.js'
 import House from '../models/house.js'
 import Job from '../models/job.js'
-import { API, CarStruct, HouseStruct, JobStruct, Common, MVCSO } from '../constants/constants.js'
+import { API, CarStruct, HouseStruct, JobStruct, Common, MVCSO, getAxios } from '../constants/constants.js'
 
 //NOTE Add axios
-let _carApi = axios.create({
-  baseURL: API.baseURL
-})
+// let _api = axios.create({
+//   baseURL: 'http://bcw-sandbox.herokuapp.com/api/'
+// })
 
-let _api = axios.create({
-  baseURL: API.baseURL
-})
+let _api = getAxios(API.SERVERS.BCW_SANDBOX)
 
 let _state = {
   cars: [],
   houses: [],
-  jobs: []
+  jobs: [],
+  currentApi: ''
 }
 
 // Observers
 let _subscribers = {
   cars: [],
   houses: [],
-  jobs: []
+  jobs: [],
+  currentApi: []
 }
 
 function _setState(propertyToSet, newValue) {
+  _state.currentApi = propertyToSet
   _state[propertyToSet] = newValue
   _subscribers[propertyToSet].forEach(observerFunction => observerFunction())
 }
@@ -41,19 +42,6 @@ function _removeFromState(propertyToSet, idToRemove) {
   let newState = [..._state[propertyToSet]].splice(itemIndex, 1)
   _setState(propertyToSet, newState)
 }
-
-// function _addCarToState(car) {
-//   _state.cars.push(car)
-//   _setState('cars', _state.cars)
-// }
-
-// function _deleteCarFromState(carId) {
-//   let carIndex = _state.cars.findIndex(car => {
-//     car._id === carId
-//   })
-//   _state.cars.splice(carIndex, 1)
-//   _setState('cars', _state.cars)
-// }
 
 function _getCatagoryObject(api, catagoryData) {
   switch (api) {
@@ -80,14 +68,15 @@ function _getCatagoryStruct(api, catagoryData) {
 function _getObjectFromEvent(api, event) {
   let catagoryObject = _getCatagoryStruct(api)
   let form = event.target
+  let result = Object.create(null)
 
   Object.keys(catagoryObject).forEach(key => {
     if (form.hasOwnProperty(key)) {
-      catagoryObject[key] = form[key].value
+      result[key] = form[key].value
     }
   });
 
-  return catagoryObject
+  return result
 }
 
 export default class Service {
@@ -112,6 +101,8 @@ export default class Service {
   }
 
   loadApi(api) {
+    console.log(_api.baseURL);
+
     _api.get(api)
       .then(response => {
         let data = response.data.data.map(data => _getCatagoryObject(api, data))
@@ -155,7 +146,7 @@ export default class Service {
     })
 
     let price = Common.toFloat(catagoryObject.props.price) + increment
-    catagoryObject.props.price =  price
+    catagoryObject.props.price = price
 
     _api.put(`${api}/${Id}`, catagoryObject.props)
       .then(response => {
@@ -164,5 +155,10 @@ export default class Service {
       .catch(error => {
         console.log(error)
       })
+  }
+
+  changeServer(apiServer) {
+    _api = getAxios(apiServer)
+    this.loadApi(_state.currentApi)
   }
 }

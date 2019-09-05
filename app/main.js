@@ -17,3 +17,5 @@ function windowResize() {
 }
 
 window.onresize = windowResize;
+
+windowResize()

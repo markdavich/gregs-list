@@ -107,5 +107,10 @@ export default class Controller {
   search(event) {
     event.preventDefault()
   }
+
+  changeServer(event) {
+    event.preventDefault()
+    _service.changeServer(event.target.value)
+  }
 }
 

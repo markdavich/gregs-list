@@ -1,9 +1,40 @@
+// const GL_SERVER = 'http://localhost:3000/api'
+// const BCW_BASE = 'http://bcw-sandbox.herokuapp.com/api/'
+
+const GL_SERVER = 'http://localhost:3000'
+const BCW_BASE = 'http://bcw-sandbox.herokuapp.com'
+
 export const API = {
-  baseURL: 'http://bcw-sandbox.herokuapp.com/api/',
   CARS: 'cars',
   HOUSES: 'houses',
-  JOBS: 'jobs'
+  JOBS: 'jobs',
+  ROOT: 'api', // This needs to match gregs-list-server
+
+  SERVERS: {
+    BCW_SANDBOX: 'bcw-sandbox',
+    GREGS_LIST: 'gregs-list-node-server'
+  }
 }
+
+export function getAxios(apiServer) {
+  let baseURL = ''
+  switch (apiServer) {
+    case API.SERVERS.BCW_SANDBOX:
+      baseURL = `${BCW_BASE}/${API.ROOT}/`
+      break
+    case API.SERVERS.GREGS_LIST:
+      baseURL = `${GL_SERVER}/${API.ROOT}/`
+      break
+  }
+
+  let result = axios.create({
+    baseURL: baseURL
+  })
+
+  return result
+}
+
+
 
 export const MVCSO = {
   CONTROLLER: {
@@ -69,7 +100,7 @@ export class Catagory {
   }
 
   getImageUrl(url) {
-    return url === '' ?
+    return this.api === API.JOBS ?
       '' :
       `<div class="image card-img-top" style="background-image:url('${url}')"></div>`
   }
@@ -101,7 +132,7 @@ export class Catagory {
   }
 
   getJobTitle() {
-
+    return `${this.props.jobTitle} (${Common.toDollars(this.props.rate)}/Hour)`
   }
 
   getButtonGroup() {
@@ -130,6 +161,12 @@ export class Catagory {
     }
   }
 
+  getPrice() {
+    return this.api === API.JOBS ?
+      `<p><sm>${Common.toDollars(this.props.hours)}</sm></p>` :
+      `<p><sm>${Common.toDollars(this.props.price)}</sm></p>`
+  }
+
   get Card() {
     return `
         ${this.getColumnTag()}
@@ -138,7 +175,7 @@ export class Catagory {
                 <div class="card-body">
                     <h5 class="title card-title">${this.getTitle()}</h5>
                     <div class="description card-text">${this.props.description}</div>
-                    <p><sm>${Common.toDollars(this.props.price)}</sm></p>
+                    ${this.getPrice()}
                     ${this.getButtonGroup()}
                 </div>
             </div>
@@ -170,7 +207,6 @@ export class CarStruct {
     this.__v = __v
   }
 }
-
 
 export class HouseStruct {
   constructor(
@@ -247,32 +283,5 @@ export const Common = {
     unrounded = y - (y % (precision === undefined ? 1 : +precision))
 
     return unrounded * 1.00
-  }
-}
-
-
-class Job{
-  constructor({ 
-    _id = "", 
-    company,
-    jobTitle,
-    hours
-  }) {
-    this._id = _id
-  }
-}
-
-class XX {
-  constructor({ name = "", id = "" }) {
-    this.name = name
-    this.id = id
-  }
-}
-
-
-class XXY {
-  constructor({ name = "", id = "" } = {}) {
-    this.name = name
-    this.id = id
   }
 }

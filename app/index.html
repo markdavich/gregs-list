@@ -21,8 +21,13 @@
         Greg's List
       </a>
 
+
       <form class="form-inline my-2 my-lg-0" onsubmit="app.controllers.controller.changeApi(event)">
-        <select class="form-control" onchange="app.controllers.controller.changeApi(event)" name="api">
+        <select class="form-control" onchange="app.controllers.controller.changeServer(event)">
+          <option value="bcw-sandbox">BCW-SANDBOX</option>
+          <option value="gregs-list-node-server">GREGS-LIST-NODE-SERVER</option>
+        </select>
+        <select class="form-control ml-sm-2" onchange="app.controllers.controller.changeApi(event)" name="api">
           <option value="cars">Cars</option>
           <option value="houses">Houses</option>
           <option value="jobs">Jobs</option>
